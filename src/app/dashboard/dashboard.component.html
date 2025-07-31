@@ -1,0 +1,69 @@
+<div class="dashboard-container">
+  <h2>Team Member Attendance - {{ today }}</h2>
+
+  <div class="filters">
+    <input type="text" placeholder="Filter by name" [(ngModel)]="nameFilter" (input)="applyFilters()">
+    <!-- <input type="text" placeholder="Filter by department" [(ngModel)]="departmentFilter" (input)="applyFilters()"> -->
+    <select [(ngModel)]="departmentFilter" (change)="applyFilters()">
+      <option value="">All Department</option>
+      <option value="Engineering">Engineering</option>
+      <option value="QA">QA</option>
+      <option value="Support">Support</option>
+    </select>
+    <select [(ngModel)]="attendanceFilter" (change)="applyFilters()">
+      <option value="">All Attendance</option>
+      <option value="Present">Present</option>
+      <option value="Absent">Absent</option>
+      <option value="WFH">WFH</option>
+      <option value="Leave">Leave</option>
+    </select>
+  </div>
+
+  <table class="attendance-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Department</th>
+        <th>Status</th>
+        <th>Actions</th>
+        <th>Edit Details</th>
+        <th>Attendance history</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let member of filteredMembers">
+        <td>{{ member.name }}</td>
+        <td>{{ member.role }}</td>
+        <td>{{ member.department }}</td>
+        <td>{{ getTodayStatus(member.id) }}</td>
+        <td>
+          <button (click)="updateAttendance(member.id, 'Present')">Present</button>
+          <button (click)="updateAttendance(member.id, 'Absent')">Absent</button>
+          <button (click)="updateAttendance(member.id, 'WFH')">WFH</button>
+          <button (click)="updateAttendance(member.id, 'Leave')">Leave</button>
+        </td>
+        <td>
+          <button (click)="goToEditMembersData(member)">Edit</button>
+        </td>
+        <td>
+          <button (click)="goToViewHistory(member.id)">View History</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="dashboard-actions">
+    <div class="left-buttons">
+      <button class="add-member-css" (click)="goToAddMemberRoute()"><strong>&plus;</strong> Add Member</button>
+    </div>
+
+    <div class="right-buttons">
+      <!-- <button (click)="debugAttendance()">Debug Attendance</button> -->
+      <button (click)="updateChanges()">Save Changes</button>
+      <button (click)="exportToCSV()">Export CSV</button>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+<!-- <router-outlet name="addPage"></router-outlet> -->

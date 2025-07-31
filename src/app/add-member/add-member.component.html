@@ -1,0 +1,37 @@
+<div class="add-member-container">
+  <h2>{{ isEditMode ? 'Edit Member' : 'Add Member' }}</h2>
+
+  <form [formGroup]="memberForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input id="name" formControlName="name" type="text" />
+      <div class="error" *ngIf="memberForm.get('name')?.invalid && memberForm.get('name')?.touched">
+        Name is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="role">Role:</label>
+      <select id="role" formControlName="role">
+        <option value="TeamLead">Team Lead</option>
+        <option value="TeamMember">Team Member</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="department">Department:</label>
+      <select id="department" formControlName="department">
+        <option value="Engineering">Engineering</option>
+        <option value="QA">QA</option>
+        <option value="Support">Support</option>
+      </select>
+    </div>
+
+    <div class="button-group">
+      <button type="submit" [disabled]="memberForm.invalid">
+        {{ isEditMode ? 'Update' : 'Add' }}
+      </button>
+      <button type="button" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>

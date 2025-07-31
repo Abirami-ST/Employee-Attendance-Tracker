@@ -1,0 +1,8 @@
+<div class="header">
+  <h2>Attendance Tracker</h2>
+
+  <div class="user-info" *ngIf="user">
+    <span >Welcome, {{ user.name }} - {{ user.role }}</span>
+    <button (click)="auth.logout()">Logout</button>
+  </div>
+</div>

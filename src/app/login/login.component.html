@@ -1,0 +1,17 @@
+<div class="login-card">
+  <h2>Attendance Tracker Login</h2>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <select [(ngModel)]="selectedName">
+    <option value="">Select Name</option>
+    <option *ngFor="let u of users" [value]="u.name">{{ u.name }}</option>
+  </select>
+
+  <select [(ngModel)]="selectedRole">
+    <option value="">Select Role</option>
+    <option value="TeamLead">Team Lead</option>
+    <option value="TeamMember">Team Member</option>
+  </select>
+
+  <button (click)="login()">Login</button>
+</div>
